@@ -24,6 +24,7 @@
 * Chris Fairless
 * Jan Wüthrich
 * Zélie Standhanske
+* Dahyann Araya
 * Yue Yu
 * Lukas Riedel
 * Raphael Portmann
