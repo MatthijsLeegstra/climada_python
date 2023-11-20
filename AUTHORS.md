@@ -29,3 +29,4 @@
 * Raphael Portmann
 * Nicolas Colombi
 * Leonie Villiger
+* Dahyann Araya
