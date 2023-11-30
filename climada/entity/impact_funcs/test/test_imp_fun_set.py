@@ -344,10 +344,10 @@ class TestExtend(unittest.TestCase):
         self.assertEqual(imp_fun.size('WS'), 1)
 
 class TestReaderMat(unittest.TestCase):
-    """Test reader functionality of the imp_funcsFuncsExcel class"""
+    """Test reader functionality of the ImpactFuncSet class"""
 
     def test_demo_file_pass(self):
-        """Read demo excel file"""
+        """Read demo matlab file"""
         # Read demo mat file
         imp_funcs = ImpactFuncSet.from_mat(ENT_TEST_MAT)
 
@@ -416,7 +416,7 @@ class TestReaderMat(unittest.TestCase):
 
 
 class TestReaderExcel(unittest.TestCase):
-    """Test reader functionality of the imp_funcsFuncsExcel class"""
+    """Test reader functionality of the ImpactFuncSet class"""
 
     def test_demo_file_pass(self):
         """Read demo excel file"""
@@ -497,7 +497,7 @@ class TestReaderExcel(unittest.TestCase):
         self.assertEqual(len(imp_funcs._data['HS'][1].mdd), 16)
 
 class TestWriter(unittest.TestCase):
-    """Test reader functionality of the imp_funcsFuncsExcel class"""
+    """Test reader functionality of the ImpactFuncSet class"""
 
     def test_write_read_pass(self):
         """Write + read excel file"""
