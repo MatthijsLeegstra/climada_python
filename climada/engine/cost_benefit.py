@@ -266,63 +266,63 @@ class CostBenefit():
         self._print_results()
         self._print_npv()
 
-    def combine_measures(self, in_meas_names, new_name, new_color, disc_rates,
-                         imp_time_depen=None, risk_func=risk_aai_agg):
-        """Compute cost-benefit of the combination of measures previously
-        computed by calc with save_imp=True. The benefits of the
-        measures per event are added. To combine with risk transfer options use
-        apply_risk_transfer.
+    # def combine_measures(self, in_meas_names, new_name, new_color, disc_rates,
+    #                      imp_time_depen=None, risk_func=risk_aai_agg):
+    #     """Compute cost-benefit of the combination of measures previously
+    #     computed by calc with save_imp=True. The benefits of the
+    #     measures per event are added. To combine with risk transfer options use
+    #     apply_risk_transfer.
 
-        Parameters
-        ----------
-        in_meas_names : list(str)
-        list with names of measures to combine
-        new_name :  str
-            name to give to the new resulting measure
-            new_color (np.array): color code RGB for new measure, e.g.
-            np.array([0.1, 0.1, 0.1])
-        disc_rates : DiscRates
-            discount rates instance
-        imp_time_depen : float, optional
-            parameter which represents time
-            evolution of impact (super- or sublinear). If None: all years
-            count the same when there is no future hazard nor entity and 1
-            (linear annual change) when there is future hazard or entity.
-            Default is None.
-        risk_func : func, optional
-            function describing risk measure given
-            an Impact. Default: average annual impact (aggregated).
+    #     Parameters
+    #     ----------
+    #     in_meas_names : list(str)
+    #     list with names of measures to combine
+    #     new_name :  str
+    #         name to give to the new resulting measure
+    #         new_color (np.array): color code RGB for new measure, e.g.
+    #         np.array([0.1, 0.1, 0.1])
+    #     disc_rates : DiscRates
+    #         discount rates instance
+    #     imp_time_depen : float, optional
+    #         parameter which represents time
+    #         evolution of impact (super- or sublinear). If None: all years
+    #         count the same when there is no future hazard nor entity and 1
+    #         (linear annual change) when there is future hazard or entity.
+    #         Default is None.
+    #     risk_func : func, optional
+    #         function describing risk measure given
+    #         an Impact. Default: average annual impact (aggregated).
 
-        Returns
-        -------
-        climada.CostBenefit
-        """
-        # pylint: disable=protected-access
-        new_cb = CostBenefit(
-            present_year=self.present_year,
-            future_year=self.future_year,
-            unit=self.unit,
-            tot_climate_risk=self.tot_climate_risk,
-            color_rgb=self.color_rgb,
-            imp_meas_future=self.imp_meas_future,
-        )
-        new_cb.color_rgb[new_name] = new_color
+    #     Returns
+    #     -------
+    #     climada.CostBenefit
+    #     """
+    #     # pylint: disable=protected-access
+    #     new_cb = CostBenefit(
+    #         present_year=self.present_year,
+    #         future_year=self.future_year,
+    #         unit=self.unit,
+    #         tot_climate_risk=self.tot_climate_risk,
+    #         color_rgb=self.color_rgb,
+    #         imp_meas_future=self.imp_meas_future,
+    #     )
+    #     new_cb.color_rgb[new_name] = new_color
 
-        # compute impacts for imp_meas_future and imp_meas_present
-        self._combine_imp_meas(new_cb, in_meas_names, new_name, risk_func, when='future')
-        if self.imp_meas_present:
-            new_cb.imp_meas_present[NO_MEASURE] = self.imp_meas_present[NO_MEASURE]
-            if imp_time_depen is None:
-                imp_time_depen = 1
-            self._combine_imp_meas(new_cb, in_meas_names, new_name, risk_func, when='present')
+    #     # compute impacts for imp_meas_future and imp_meas_present
+    #     self._combine_imp_meas(new_cb, in_meas_names, new_name, risk_func, when='future')
+    #     if self.imp_meas_present:
+    #         new_cb.imp_meas_present[NO_MEASURE] = self.imp_meas_present[NO_MEASURE]
+    #         if imp_time_depen is None:
+    #             imp_time_depen = 1
+    #         self._combine_imp_meas(new_cb, in_meas_names, new_name, risk_func, when='present')
 
-        # cost-benefit computation: fill measure's benefit and cost_ben_ratio
-        time_dep = new_cb._time_dependency_array(imp_time_depen)
-        new_cb._cost_ben_one(new_name, new_cb.imp_meas_future[new_name], disc_rates,
-                             time_dep)
-        new_cb._print_results()
-        new_cb._print_npv()
-        return new_cb
+    #     # cost-benefit computation: fill measure's benefit and cost_ben_ratio
+    #     time_dep = new_cb._time_dependency_array(imp_time_depen)
+    #     new_cb._cost_ben_one(new_name, new_cb.imp_meas_future[new_name], disc_rates,
+    #                          time_dep)
+    #     new_cb._print_results()
+    #     new_cb._print_npv()
+    #     return new_cb
 
     def apply_risk_transfer(self, meas_name, attachment, cover, disc_rates,
                             cost_fix=0, cost_factor=1, imp_time_depen=None,
@@ -404,20 +404,20 @@ class CostBenefit():
         self._print_risk_transfer(layer, layer_no, cost_fix, cost_factor)
         self._print_npv()
 
-    def remove_measure(self, meas_name):
-        """Remove computed values of given measure
+    # def remove_measure(self, meas_name):
+    #     """Remove computed values of given measure
 
-        Parameters
-        ----------
-        meas_name : str
-            name of measure to remove
-        """
-        del self.color_rgb[meas_name]
-        del self.benefit[meas_name]
-        del self.cost_ben_ratio[meas_name]
-        del self.imp_meas_future[meas_name]
-        if self.imp_meas_present:
-            del self.imp_meas_present[meas_name]
+    #     Parameters
+    #     ----------
+    #     meas_name : str
+    #         name of measure to remove
+    #     """
+    #     del self.color_rgb[meas_name]
+    #     del self.benefit[meas_name]
+    #     del self.cost_ben_ratio[meas_name]
+    #     del self.imp_meas_future[meas_name]
+    #     if self.imp_meas_present:
+    #         del self.imp_meas_present[meas_name]
 
     def plot_cost_benefit(self, cb_list=None, axis=None, **kwargs):
         """Plot cost-benefit graph. Call after calc().
